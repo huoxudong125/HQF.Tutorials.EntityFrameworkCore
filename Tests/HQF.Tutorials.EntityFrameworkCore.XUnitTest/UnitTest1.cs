@@ -5,15 +5,18 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace HQF.Tutorials.EntityFrameworkCore.XUnitTest
 {
     public class UnitTest1 : IClassFixture<DailyDbContextFixture>
     {
-        DailyDbContextFixture _fixture;
-        public UnitTest1(DailyDbContextFixture fixture)
+        private ITestOutputHelper _outputHelper { get; }
+        private DailyDbContextFixture _fixture;
+        public UnitTest1(DailyDbContextFixture fixture,ITestOutputHelper outputHelper)
         {
             _fixture = fixture;
+            _outputHelper = outputHelper;
         }
 
         [Fact]
@@ -25,6 +28,8 @@ namespace HQF.Tutorials.EntityFrameworkCore.XUnitTest
 
             try
             {
+                _outputHelper.WriteLine("Try to Test.");
+
                 var options = new DbContextOptionsBuilder<DailyDbContext>()
                     .UseSqlite(connection)
                     .Options;
@@ -38,7 +43,9 @@ namespace HQF.Tutorials.EntityFrameworkCore.XUnitTest
                 // Run the test against one instance of the context
                 using (var context = new DailyDbContext(options))
                 {
+                    
                     context.WorkAreas.Add(new WorkArea() { Name = "工区1" });
+                    //context.SaveChanges();
                 }
 
                 // Use a separate instance of the context to verify correct data was saved to database
@@ -47,10 +54,20 @@ namespace HQF.Tutorials.EntityFrameworkCore.XUnitTest
                     Assert.Equal(1, context.WorkAreas.Count());
                     Assert.Equal("工区1", context.WorkAreas.Single().Name);
                 }
+
+               
             }
             catch (Exception e)
             {
-                _fixture.OutputHelper.WriteLine(e.Message);
+                
+                while (e != null)
+                {
+                    _outputHelper.WriteLine(e.Message);
+                    e = e.InnerException;
+                }
+
+                
+                
             }
             finally
             {
