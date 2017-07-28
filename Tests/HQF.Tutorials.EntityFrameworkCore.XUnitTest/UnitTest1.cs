@@ -13,10 +13,14 @@ namespace HQF.Tutorials.EntityFrameworkCore.XUnitTest
     {
         private ITestOutputHelper _outputHelper { get; }
         private DailyDbContextFixture _fixture;
-        public UnitTest1(DailyDbContextFixture fixture, ITestOutputHelper outputHelper)
+        private readonly IMessageSink _diagnosticMessageSink;
+
+        public UnitTest1(DailyDbContextFixture fixture, ITestOutputHelper outputHelper,
+            IMessageSink diagnosticMessageSink)
         {
             _fixture = fixture;
             _outputHelper = outputHelper;
+            _diagnosticMessageSink = diagnosticMessageSink;
         }
 
         [Fact]
@@ -45,7 +49,7 @@ namespace HQF.Tutorials.EntityFrameworkCore.XUnitTest
                 {
 
                     context.WorkAreas.Add(new WorkArea() { Name = "工区1" });
-                    //context.SaveChanges();
+                    context.SaveChanges();
                 }
 
                 // Use a separate instance of the context to verify correct data was saved to database
@@ -54,50 +58,15 @@ namespace HQF.Tutorials.EntityFrameworkCore.XUnitTest
                     Assert.Equal(1, context.WorkAreas.Count());
                     Assert.Equal("工区1", context.WorkAreas.Single().Name);
                 }
-
-
             }
-            catch (Exception e)
-            {
 
-                while (e != null)
-                {
-                    _outputHelper.WriteLine(e.Message);
-                    e = e.InnerException;
-                }
-
-
-
-            }
             finally
             {
                 connection.Close();
             }
 
         }
-
-        [Fact]
-        public void TestAssert()
-        {
-
-
-            try
-            {
-                Assert.True(1 < 0, " server is false");
-
-            }
-            catch (Exception e)
-            {
-                while (e != null)
-                {
-                    _outputHelper.WriteLine(e.Message);
-                    e = e.InnerException;
-                }
-            }
-
-            Assert.True(1 < 0, "current value is false");
-        }
-
+               
 
     }
 }
