@@ -76,6 +76,27 @@ namespace HQF.Tutorials.EntityFrameworkCore.XUnitTest
 
         }
 
+        [Fact]
+        public void TestAssert() {
+            
+
+            try
+            {
+                Assert.True(1<0," server is false");
+
+            }
+            catch (Exception e)
+            {
+                while (e != null)
+                {
+                    _outputHelper.WriteLine(e.Message);
+                    e = e.InnerException;
+                }
+            }
+
+            Assert.True(1 < 0, "current value is false");
+        }
+
 
     }
 }
