@@ -13,7 +13,7 @@ namespace HQF.Tutorials.EntityFrameworkCore.XUnitTest
     {
         private ITestOutputHelper _outputHelper { get; }
         private DailyDbContextFixture _fixture;
-        public UnitTest1(DailyDbContextFixture fixture,ITestOutputHelper outputHelper)
+        public UnitTest1(DailyDbContextFixture fixture, ITestOutputHelper outputHelper)
         {
             _fixture = fixture;
             _outputHelper = outputHelper;
@@ -43,7 +43,7 @@ namespace HQF.Tutorials.EntityFrameworkCore.XUnitTest
                 // Run the test against one instance of the context
                 using (var context = new DailyDbContext(options))
                 {
-                    
+
                     context.WorkAreas.Add(new WorkArea() { Name = "工区1" });
                     //context.SaveChanges();
                 }
@@ -55,19 +55,19 @@ namespace HQF.Tutorials.EntityFrameworkCore.XUnitTest
                     Assert.Equal("工区1", context.WorkAreas.Single().Name);
                 }
 
-               
+
             }
             catch (Exception e)
             {
-                
+
                 while (e != null)
                 {
                     _outputHelper.WriteLine(e.Message);
                     e = e.InnerException;
                 }
 
-                
-                
+
+
             }
             finally
             {
@@ -77,12 +77,13 @@ namespace HQF.Tutorials.EntityFrameworkCore.XUnitTest
         }
 
         [Fact]
-        public void TestAssert() {
-            
+        public void TestAssert()
+        {
+
 
             try
             {
-                Assert.True(1<0," server is false");
+                Assert.True(1 < 0, " server is false");
 
             }
             catch (Exception e)
