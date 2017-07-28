@@ -44,7 +44,7 @@ namespace HQF.Tutorials.EntityFrameworkCore.XUnitTest
                 using (var context = new DailyDbContext(options))
                 {
 
-                    context.WorkAreas.Add(new WorkArea() { Name = "工区1" });
+                    context.WorkAreas.Add(new WorkArea() { Name = "宸ュ尯1" });
                     //context.SaveChanges();
                 }
 
@@ -52,7 +52,7 @@ namespace HQF.Tutorials.EntityFrameworkCore.XUnitTest
                 using (var context = new DailyDbContext(options))
                 {
                     Assert.Equal(1, context.WorkAreas.Count());
-                    Assert.Equal("工区1", context.WorkAreas.Single().Name);
+                    Assert.Equal("宸ュ尯1", context.WorkAreas.Single().Name);
                 }
 
 
