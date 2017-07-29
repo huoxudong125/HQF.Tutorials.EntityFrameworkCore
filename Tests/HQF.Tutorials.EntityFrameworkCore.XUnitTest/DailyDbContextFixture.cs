@@ -25,9 +25,13 @@ namespace HQF.Tutorials.EntityFrameworkCore.XUnitTest
             }
         }
 
-
-
-
+        public string SqlConnectionStr
+        {
+            get
+            {
+                return @"Server=(localdb)\mssqllocaldb;Database=daily_db_Test;Trusted_Connection=True;MultipleActiveResultSets=true";
+            }
+        }
 
         private DailyDbContext GetDailyDbContext()
         {
