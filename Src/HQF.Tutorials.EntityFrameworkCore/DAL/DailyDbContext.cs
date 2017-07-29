@@ -61,7 +61,7 @@ namespace HQF.Daily.Web.DAL
 
             modelBuilder.Entity<WorkItem>().HasOne(a => a.ParentWorkItem).WithMany(b => b.SubWorkItems).HasForeignKey(t => t.ParentId);
 
-            modelBuilder.Entity<WorkItem>().HasOne(a => a.WorkArea).WithMany(b => b.WorkItems).HasForeignKey(t => t.WorkAreaId);
+           // modelBuilder.Entity<WorkItem>().HasOne(a => a.WorkArea).WithMany(b => b.WorkItems).HasForeignKey(t => t.WorkAreaId);
 
             modelBuilder.Entity<WorkItem>().HasOne(a => a.WorkType).WithMany(b => b.WorkItems).HasForeignKey(t => t.WorkTypeId);
 

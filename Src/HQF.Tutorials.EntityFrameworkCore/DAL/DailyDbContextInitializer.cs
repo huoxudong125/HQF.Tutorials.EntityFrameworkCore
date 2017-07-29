@@ -49,8 +49,8 @@ namespace HQF.Daily.Web.DAL
 
             context.WorkTeams.Add(workTeam);
 
-            var workitem = new WorkItem() { Name = "平遥杜村一桥", WorkArea = workArea, WorkType = workTypeBridge };
-            var subWorkitem = new WorkItem() { Name = "平遥杜村一桥 开挖", WorkArea = workArea,  WorkType = workTypeBridgeFirstStep,ParentWorkItem=workitem };
+            var workitem = new WorkItem() { Name = "平遥杜村一桥",  WorkType = workTypeBridge };
+            var subWorkitem = new WorkItem() { Name = "平遥杜村一桥 开挖",  WorkType = workTypeBridgeFirstStep,ParentWorkItem=workitem };
 
             context.WorkItems.Add(workitem);
             context.WorkItems.Add(subWorkitem);

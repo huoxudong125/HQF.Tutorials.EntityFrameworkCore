@@ -15,7 +15,7 @@ namespace HQF.Daily.Web.Domains
 
         public int WorkTypeId { get; set; }
 
-        public int WorkAreaId { get; set; }
+       /// public int WorkAreaId { get; set; }
 
 
 
@@ -45,7 +45,7 @@ namespace HQF.Daily.Web.Domains
         /// <summary>
         /// 当前工区
         /// </summary>
-        public  WorkArea WorkArea { get; set; }
+       /// public  WorkArea WorkArea { get; set; }
 
 
         /// <summary>

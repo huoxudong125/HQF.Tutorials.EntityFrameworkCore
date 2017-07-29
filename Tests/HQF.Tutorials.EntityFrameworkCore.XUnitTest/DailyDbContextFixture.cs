@@ -1,15 +1,53 @@
-﻿using System;
+﻿using HQF.Daily.Web.DAL;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using Xunit.Abstractions;
 
 namespace HQF.Tutorials.EntityFrameworkCore.XUnitTest
 {
-    public class DailyDbContextFixture:IDisposable
+    public class DailyDbContextFixture : IDisposable
     {
+
+        private  DailyDbContext _dailyDbContext;
+
+
+        public DailyDbContext DailyDbContext
+        {
+            get
+            {
+                if (_dailyDbContext == null) {
+                    _dailyDbContext = GetDailyDbContext();
+                }
+                return _dailyDbContext;
+            }
+        }
+
+
+
+
+
+        private DailyDbContext GetDailyDbContext()
+        {
+            var serviceProvider = new ServiceCollection()
+               .AddEntityFrameworkSqlServer()
+               .BuildServiceProvider();
+
+            var builder = new DbContextOptionsBuilder<DailyDbContext>();
+
+            builder.UseSqlServer($"Server=(localdb)\\mssqllocaldb;Database=Daily_db_{Guid.NewGuid()};Trusted_Connection=True;MultipleActiveResultSets=true")
+                    .UseInternalServiceProvider(serviceProvider);
+
+            var context = new DailyDbContext(builder.Options);
+
+            return context;
+        }
 
         #region IDisposable Support
         private bool disposedValue = false; // 要检测冗余调用
+
 
         protected virtual void Dispose(bool disposing)
         {
