@@ -96,7 +96,7 @@ namespace HQF.Tutorials.EntityFrameworkCore.XUnitTest
                 // Run the test against one instance of the context
                 using (var context = _fixture.DailyDbContext)
                 {
-
+                    context.Database.EnsureCreated();
                     context.Projects.Add(new Project() { Name = "Project1" });
                     context.SaveChanges();
                 }
@@ -104,6 +104,7 @@ namespace HQF.Tutorials.EntityFrameworkCore.XUnitTest
                 // Use a separate instance of the context to verify correct data was saved to database
                 using (var context = _fixture.DailyDbContext)
                 {
+                    context.Database.EnsureCreated();
                     Assert.Equal(1, context.Projects.Count());
                     Assert.Equal("Project1", context.Projects.Single().Name);
                 }
