@@ -29,7 +29,7 @@ namespace HQF.Tutorials.EntityFrameworkCore.XUnitTest
         {
             get
             {
-                return @"Server=(localdb)\mssqllocaldb;Database=daily_db_Test;Trusted_Connection=True;MultipleActiveResultSets=true";
+                return @"Server=(localdb)\mssqllocaldb;Database=daily_db_Test;Trusted_Connection=True;MultipleActiveResultSets=true;Integrated Security=True;";
             }
         }
 
